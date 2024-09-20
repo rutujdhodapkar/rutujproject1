@@ -1,5 +1,4 @@
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report
 from sklearn.feature_extraction.text import TfidfVectorizer
 import streamlit as st
 import pandas as pd
@@ -33,27 +32,18 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Train the model
 vectorizer, logistic_regression_model = train_model(X_train, y_train)
 
-# Make predictions on test set
-X_test_vec = vectorizer.transform(X_test)
-y_pred = logistic_regression_model.predict(X_test_vec)
-
-# Evaluate model
-accuracy = accuracy_score(y_test, y_pred)
-st.write(f'Logistic Regression Accuracy: {accuracy:.4f}')
-st.write('Classification Report:')
-st.text(classification_report(y_test, y_pred))
-
 # Prediction function
 def predict_emotion_logistic(text):
     text_vec = vectorizer.transform([text])
     return logistic_regression_model.predict(text_vec)[0]
 
 # Streamlit app
-st.title('Emotion Prediction using Logistic Regression')
+st.title('Text to Emotion Prediction')
 
-# Display the dataset
-st.subheader('Dataset')
-st.write(data.head())
+# Display the dataset with only one row per emotion
+st.subheader('Dataset (One Row per Emotion)')
+unique_emotions = data.groupby('Emotion').first().reset_index()
+st.write(unique_emotions)
 
 # Input for prediction
 st.subheader('Predict Emotion from Text')
@@ -65,3 +55,6 @@ if st.button('Predict'):
         st.write(f'Predicted Emotion: {predicted_emotion}')
     else:
         st.write('Please enter some text to predict the emotion.')
+
+# Add credits
+st.markdown("**App developed by: Rutuj Dhodapkar**")
