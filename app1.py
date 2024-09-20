@@ -47,15 +47,19 @@ st.write(unique_emotions)
 
 # Input for prediction
 st.subheader('Predict Emotion from Text')
+st.markdown("Note: This is basic ML model, don't use complex sentences. use less filler word to not get bias output.")
 input_text = st.text_input('Enter text:')
 
 if st.button('Predict'):
     if input_text:
         predicted_emotion = predict_emotion_logistic(input_text)
-        st.write(f'Predicted Emotion: {predicted_emotion}')
+        st.write(f'Predicted Emotion: **{predicted_emotion}**')
     else:
         st.write('Please enter some text to predict the emotion.')
 
 # Add credits and note
-st.markdown("**App developed by: Rutuj Dhodapkar**")
-st.markdown("_This application uses a machine learning model to provide accurate emotion predictions based on the input text._")
+st.markdown("*App developed by: Rutuj Dhodapkar*")
+st.markdown("")
+st.markdown("Note-1: Make sure you'r sentences are not based on your current situation, Model not uses any realtime data")
+st.markdown("Note-2: Check you'r sentence with other source to understand corect output.")
+st.markdown("Note-3: This application uses a state-of-the-art machine learning model to predict emotions based on the input text. For optimal performance, provide relevant and clear text(no other types of symbol's) to ensure the most accurate predictions")
