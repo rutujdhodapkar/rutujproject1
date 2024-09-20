@@ -47,7 +47,7 @@ st.write(unique_emotions)
 
 # Input for prediction
 st.subheader('Predict Emotion from Text')
-st.markdown("Note: This is basic ML model, don't use complex sentences. use less filler word to not get bias output.")
+st.markdown("**Note: This is basic ML model, don't use complex sentences. use less filler word to not get bias output.**")
 input_text = st.text_input('Enter text:')
 
 if st.button('Predict'):
