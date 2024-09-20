@@ -1,4 +1,5 @@
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 from sklearn.feature_extraction.text import TfidfVectorizer
 import streamlit as st
 import pandas as pd
@@ -32,34 +33,35 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 # Train the model
 vectorizer, logistic_regression_model = train_model(X_train, y_train)
 
+# Make predictions on test set
+X_test_vec = vectorizer.transform(X_test)
+y_pred = logistic_regression_model.predict(X_test_vec)
+
+# Evaluate model
+accuracy = accuracy_score(y_test, y_pred)
+st.write(f'Logistic Regression Accuracy: {accuracy:.4f}')
+st.write('Classification Report:')
+st.text(classification_report(y_test, y_pred))
+
 # Prediction function
 def predict_emotion_logistic(text):
     text_vec = vectorizer.transform([text])
     return logistic_regression_model.predict(text_vec)[0]
 
 # Streamlit app
-st.title('Text to Emotion Prediction')
+st.title('Emotion Prediction using Logistic Regression')
 
-# Display the dataset with only one row per emotion
-st.subheader('Dataset (Example)')
-unique_emotions = data.groupby('Emotion').first().reset_index()
-st.write(unique_emotions)
+# Display the dataset
+st.subheader('Dataset')
+st.write(data.head())
 
 # Input for prediction
 st.subheader('Predict Emotion from Text')
-st.markdown("Note: This is basic ML model, don't use complex sentences. use less filler word to not get bias output.")
 input_text = st.text_input('Enter text:')
 
 if st.button('Predict'):
     if input_text:
         predicted_emotion = predict_emotion_logistic(input_text)
-        st.write(f'Predicted Emotion: *{predicted_emotion}*')
+        st.write(f'Predicted Emotion: {predicted_emotion}')
     else:
         st.write('Please enter some text to predict the emotion.')
-
-# Add credits and note
-st.markdown("*App developed by: Rutuj Dhodapkar*")
-
-st.markdown("Note-1: Make sure you'r sentences are not based on your current situation, Model not uses any realtime data")
-st.markdown("Note-2: Check you'r sentence with other source to understand corect output.")
-st.markdown("Note-3: This application uses a state-of-the-art machine learning model to predict emotions based on the input text. For optimal performance, provide relevant and clear text(no other types of symbol's) to ensure the most accurate predictions")
