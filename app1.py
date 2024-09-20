@@ -41,7 +41,7 @@ def predict_emotion_logistic(text):
 st.title('Text to Emotion Prediction')
 
 # Display the dataset with only one row per emotion
-st.subheader('Dataset (One Row per Emotion)')
+st.subheader('Dataset (Example)')
 unique_emotions = data.groupby('Emotion').first().reset_index()
 st.write(unique_emotions)
 
@@ -56,5 +56,6 @@ if st.button('Predict'):
     else:
         st.write('Please enter some text to predict the emotion.')
 
-# Add credits
+# Add credits and note
 st.markdown("**App developed by: Rutuj Dhodapkar**")
+st.markdown("This application uses a state-of-the-art machine learning model to predict emotions based on the input text. For optimal performance, provide clear and relevant text to ensure the most accurate predictions")
