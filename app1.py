@@ -58,4 +58,4 @@ if st.button('Predict'):
 
 # Add credits and note
 st.markdown("**App developed by: Rutuj Dhodapkar**")
-st.markdown("This application uses a state-of-the-art machine learning model to predict emotions based on the input text. For optimal performance, provide clear and relevant text to ensure the most accurate predictions")
+st.markdown("Note: This application uses a state-of-the-art machine learning model to predict emotions based on the input text. For optimal performance, provide relevant and clear text(no other types of symbol's) to ensure the most accurate predictions")
