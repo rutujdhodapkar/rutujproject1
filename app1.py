@@ -58,7 +58,7 @@ if st.button('Predict'):
         st.write('Please enter some text to predict the emotion.')
 
 # Add credits and note
-st.markdown("*App developed by: Rutuj Dhodapkar*")
+st.markdown("**App developed by: Rutuj Dhodapkar**")
 st.markdown("")
 st.markdown("Note-1: Make sure you'r sentences are not based on your current situation, Model not uses any realtime data")
 st.markdown("Note-2: Check you'r sentence with other source to understand corect output.")
