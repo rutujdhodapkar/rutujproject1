@@ -1,6 +1,7 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.pipeline import Pipeline
 import streamlit as st
 import pandas as pd
 import re
@@ -8,7 +9,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-# Download NLTK resources
+# Ensure necessary NLTK resources are downloaded
 nltk.download('stopwords')
 nltk.download('wordnet')
 
@@ -50,15 +51,18 @@ param_grid = {
     'logreg__C': [0.01, 0.1, 1, 10, 100],
     'logreg__solver': ['lbfgs', 'liblinear']
 }
+
+# Using GridSearchCV to find the best model parameters
 grid_search = GridSearchCV(pipeline, param_grid, cv=5)
 grid_search.fit(X_train, y_train)
 
-# Best model
+# Get the best model from GridSearchCV
 best_model = grid_search.best_estimator_
 
 # Prediction function
 def predict_emotion(text):
-    return best_model.predict([preprocess_text(text)])[0]
+    processed_text = preprocess_text(text)
+    return best_model.predict([processed_text])[0]
 
 # Streamlit app
 st.title('Text to Emotion Prediction')
