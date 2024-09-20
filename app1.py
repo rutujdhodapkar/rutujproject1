@@ -53,7 +53,7 @@ input_text = st.text_input('Enter text:')
 if st.button('Predict'):
     if input_text:
         predicted_emotion = predict_emotion_logistic(input_text)
-        st.write(f'Predicted Emotion: {predicted_emotion}')
+        st.write(f'Predicted Emotion: **{predicted_emotion}**')
     else:
         st.write('Please enter some text to predict the emotion.')
 
