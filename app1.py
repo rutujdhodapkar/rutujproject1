@@ -64,3 +64,10 @@ st.markdown("")
 st.markdown("Note-1: Make sure your sentences are not based on your current situation, Model not uses any realtime data")
 st.markdown("Note-2: Check your sentence with other source to understand correct output.")
 st.markdown("Note-3: This application uses a state-of-the-art machine learning model to predict emotions based on the input text. For optimal performance, provide relevant and clear text(no other types of symbol's) to ensure the most accurate predictions")
+
+
+# After training the model, you can check the number of features
+num_features = len(vectorizer.get_feature_names_out())
+num_parameters = num_features + 1  # Add 1 for the bias term
+
+st.write(f'The model is using {num_parameters} parameters (including the bias term).')
