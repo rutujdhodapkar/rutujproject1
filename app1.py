@@ -40,10 +40,10 @@ def predict_emotion_logistic(text):
 
 # Streamlit app
 st.title('Text to Emotion Prediction')
-
+st.subheader("MODEL BASE ON 17042 PARAMETERS")
 # Display the dataset with only one row per emotion
 st.subheader('Dataset (Example)')
-st.subheader("MODEL BASE ON 17042 PARAMETERS")
+
 unique_emotions = data.groupby('Emotion').first().reset_index()
 st.write(unique_emotions)
 
